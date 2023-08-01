@@ -1,0 +1,16 @@
+## loop para agregar novas visões às variáveis
+ref = df.select(F.col('ref').distinct()).toPandas()
+qtd = 18
+def expo (df, ref, qtd):
+    for x in range(ref):
+        print('Analise performance:', x)
+        mes = 1
+        cbc = df.filter(F.col('ref')==x)
+        y = x[x+mes]
+        while mes <= qtd:
+            crz = spark.table('whatever').filter(F.col('ref')==y)\
+            .select(F.col('n').alias(f'n_{mes}'), F.col('pk'))
+            cbc.join(crz, 'pk'=='pk','outer')
+            mes ++
+            y= x[x+mes]
+
